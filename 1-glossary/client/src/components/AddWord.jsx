@@ -4,8 +4,6 @@ const Add = ({onAdd}) => {
   const [word, setWord] = useState('');
   const [definition, setDesc] = useState('');
 
-
-
   const onChange = (e) => {
     if (e.target.id === 'word') {
       setWord(e.target.value);

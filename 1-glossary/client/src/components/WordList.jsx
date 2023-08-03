@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
-const WordList = ({words}) => {
+const WordList = ({words, deleteWord, edit}) => {
+
   if ({words}.words.data === undefined) {
     return (
       <div>
@@ -19,9 +20,15 @@ const WordList = ({words}) => {
         {words.data.map((word, index) => {
           return (
             <div className='word-tile' key={index}>
-              <li id="word" desc={word.definition} onClick={(e) => {
-                console.log('clicked', e.target);
-              }}> {word.word} Definition: {word.definition} </li>
+              <li id="word" desc={word.definition}> {word.word} Definition: {word.definition} <button onClick={(e) =>{
+                var newDefinition = prompt('Enter a new definition.');
+                edit({word, newDefinition});
+              }}data-action="edit">edit</button>
+              <button value={word.word} onClick={(e) => {
+                deleteWord(e);
+              }}
+              data-action="delete">&#10007;</button></li>
+
             </div>
           )
         })}

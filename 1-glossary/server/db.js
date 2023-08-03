@@ -37,6 +37,30 @@ let find = () => {
   return Word.find();
 }
 
+let deleteWord = (word) => {
+  console.log('deleting ', {word: word});
+  Word.deleteOne({word: word})
+    .then(() => {
+      console.log('Deleted entry');
+    })
+    .catch(err => {
+      console.log(err);
+    })
+}
+
+let edit = (word) => {
+  console.log('editing ', word.word);
+  var oldDefinition = word.word.definition;
+  Word.findOneAndUpdate({definition: oldDefinition}, {definition: word.newDefinition})
+    .then(() => {
+      console.log('Edited entry');
+    })
+    .catch(err => {
+      console.log(err);
+    })
+}
+
 module.exports.save = save;
 module.exports.find = find;
-
+module.exports.deleteWord = deleteWord;
+module.exports.edit = edit;
